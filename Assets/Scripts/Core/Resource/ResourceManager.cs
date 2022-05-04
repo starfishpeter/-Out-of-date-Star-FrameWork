@@ -21,8 +21,10 @@ public class ResourceManager : BaseManager<ResourceManager>
         {
             return GameObject.Instantiate(res);
         }
-
-        return res;
+        else
+        {
+            return res;
+        }
     }
 
     /// <summary>
@@ -52,7 +54,9 @@ public class ResourceManager : BaseManager<ResourceManager>
         {
             action(GameObject.Instantiate(r.asset) as T);
         }
-
-        action(r.asset as T);
+        else
+        {
+            action(r.asset as T);
+        }
     }
 }

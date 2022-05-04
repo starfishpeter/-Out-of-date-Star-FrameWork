@@ -17,6 +17,7 @@ public class AudioTest : MonoBehaviour
         {
             AudioManager.GetInstance().ChangeSoundVolume(0.5f);
             AudioManager.GetInstance().SoundPlay("ReloadAmmo", false, null);
+
         }
     }
 
