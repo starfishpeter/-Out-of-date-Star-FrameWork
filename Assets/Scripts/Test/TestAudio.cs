@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioTest : MonoBehaviour
+public class TestAudio : MonoBehaviour
 {
+    private float volume = 1f;
 
     void Start()
     {
@@ -15,10 +16,13 @@ public class AudioTest : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            AudioManager.GetInstance().ChangeSoundVolume(0.5f);
-            AudioManager.GetInstance().SoundPlay("ReloadAmmo", false, null);
-
+            AudioManager.GetInstance().SoundPlay("true", false, null);
         }
-    }
 
+        if(volume > 0f)
+        {
+            AudioManager.GetInstance().ChangeSoundVolume(volume -= Time.deltaTime/50);
+        }
+        
+    }
 }

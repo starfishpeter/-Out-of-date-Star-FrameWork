@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputMove : MonoBehaviour
+public class TestInputMove : MonoBehaviour
 {
     void Start()
     {
@@ -12,11 +12,6 @@ public class InputMove : MonoBehaviour
         EventCenter.GetInstance().AddEventListener<float>("Horizontal", HorizontalMove);
         EventCenter.GetInstance().AddEventListener<float>("Vertical", VerticalMove);
         EventCenter.GetInstance().AddEventListener<int>("MouseDown", CheckMouseDown);
-    }
-
-    void Update()
-    {
-        
     }
 
     private void CheckInputDown(KeyCode key)
@@ -45,7 +40,7 @@ public class InputMove : MonoBehaviour
     private void HorizontalMove(float direction)
     {
         float speed = direction * 10;
-        this.transform.Translate(speed * Time.deltaTime,0,0);
+        this.transform.Translate(speed * Time.deltaTime, 0, 0);
     }
 
     private void VerticalMove(float direction)

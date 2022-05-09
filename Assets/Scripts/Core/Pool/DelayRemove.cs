@@ -7,7 +7,7 @@ public class DelayRemove : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        Invoke("Push", 3);
+        Invoke("Push", 2);
     }
 
     void Push()

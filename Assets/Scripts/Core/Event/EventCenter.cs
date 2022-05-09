@@ -37,6 +37,16 @@ public class EventCenter : BaseManager<EventCenter>
     //存放事件的容器 Key是事件名 value是监听事件对应的委托函数们
     private Dictionary<string, I_EventGeneric> eventDic = new Dictionary<string, I_EventGeneric>();
 
+    public EventCenter()
+    {
+        MonoManager.GetInstance().AddUpdateListener(EventUpdate);
+    }
+
+    private void EventUpdate()
+    {
+
+    }
+
     /// <summary>
     /// 添加事件监听
     /// </summary>
