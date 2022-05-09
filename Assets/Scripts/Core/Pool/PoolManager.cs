@@ -54,7 +54,6 @@ public class PoolData
         obj = poolList[0];
         poolList.RemoveAt(0);
 
-
         obj.SetActive(true);//记得一定要激活
         obj.transform.parent = null;//不显示在pool里的分类下 而是显示在外面
 
@@ -68,6 +67,41 @@ public class PoolManager : BaseManager<PoolManager>
     public Dictionary<string, PoolData> poolDic = new Dictionary<string, PoolData>();
 
     private GameObject poolObj;
+
+    public PoolManager()
+    {
+        //有需要再启用 改成合适的回收冗余的上限和间隔时间
+        //MonoManager.GetInstance().StartCoroutine(ClearCache(5,10));
+    }
+
+    /// <summary>
+    /// 回收对象池冗余
+    /// </summary>
+    /// <param name="max">单个分类正常允许存在的最大数量</param>
+    /// <param name="time">间隔几秒集中回收一次</param>
+    /// <returns></returns>
+    IEnumerator ClearCache(int max, float time)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(time);
+            if(poolDic.Count > 0)
+            {
+                foreach(PoolData data in poolDic.Values)
+                {
+                    if (data.poolList.Count > max) 
+                    {
+                        Debug.Log(data.poolList.Count);
+                        for (int i = data.poolList.Count - 1; i > max - 1; i--)
+                        {
+                            GameObject.Destroy(data.poolList[i]);
+                            data.poolList.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// 从分类里异步加载对象
