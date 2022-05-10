@@ -81,27 +81,35 @@ public class AudioManager : BaseManager<AudioManager>
     /// <param name="callBack">返回音效 用于停止播放</param>
     public void SoundPlay(string name, bool isLoop, UnityAction<GameObject> callBack = null)
     {
-
-        PoolManager.GetInstance().GetObj("Music/SoundPlay", (obj) =>
+        ResourceManager.GetInstance().LoadAsync<AudioClip>("Music/Sound/" + name, (clip) =>
         {
-            obj.name = "Music/SoundPlay";
-
-            ResourceManager.GetInstance().LoadAsync<AudioClip>("Music/Sound/" + name, (clip) =>
+            PoolManager.GetInstance().GetObj("Music/SoundPlay", (obj) =>
             {
+                obj.name = "Music/SoundPlay";
+
                 AudioSource source = obj.GetComponent<AudioSource>();
                 source.clip = clip;
+
+                if(!source.isPlaying)
+                {
+                    source.Play();
+                }
+
                 source.volume = SoundVolume;
-                if(isLoop)
+
+                if (isLoop)
                 {
                     source.loop = true;
                 }
 
-                soundList.Add(obj);
-                
                 if (callBack != null)
                 {
                     callBack(obj);
                 }
+
+                MonoManager.GetInstance().StartCoroutine(source.GetComponent<SoundRecycle>().Recycle());
+
+                soundList.Add(obj);
             });
         });
     }

@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class SoundRecycle : MonoBehaviour
 {
-    void Update()
+
+    public IEnumerator Recycle()
     {
-        Recycle();
+        Debug.Log("回收开始");
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+        Debug.Log("回收结束");
+        PoolManager.GetInstance().PushObj(this.name, this.gameObject);
     }
 
-    private void Recycle()
+    private void OnDisable()
     {
-        if (!this.GetComponent<AudioSource>().isPlaying)
-        {
-            PoolManager.GetInstance().PushObj(this.name, this.gameObject);
-        }
+        StopAllCoroutines();
     }
+
 }
