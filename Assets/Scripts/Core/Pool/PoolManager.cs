@@ -24,10 +24,9 @@ public class PoolData
     /// <param name="poolObj">分类的父节点（最外层的pool）</param>
     public PoolData(GameObject obj, GameObject poolObj)
     {
-        //衣柜 塞 抽屉
         //pool下放入分类的文件夹
         rootObj = new GameObject(obj.name);
-        rootObj.transform.parent = poolObj.transform;
+        rootObj.transform.SetParent(poolObj.transform, true);
         poolList = new List<GameObject>();
         PushObj(obj);
     }
@@ -40,7 +39,7 @@ public class PoolData
     {
         obj.SetActive(false);//隐藏
         poolList.Add(obj);
-        obj.transform.parent = rootObj.transform;
+        obj.transform.SetParent(rootObj.transform, true);
     }
 
     /// <summary>
@@ -49,13 +48,13 @@ public class PoolData
     /// <returns></returns>
     public GameObject GetObj()
     {
-        GameObject obj = null;
-
-        obj = poolList[0];
+        GameObject obj = poolList[0];
         poolList.RemoveAt(0);
 
-        obj.SetActive(true);//记得一定要激活
-        obj.transform.parent = null;//不显示在pool里的分类下 而是显示在外面
+        //记得一定要激活
+        obj.SetActive(true);
+        //不显示在pool里的分类下 而是显示在外面
+        obj.transform.SetParent(null, true);
 
         return obj;
     }
@@ -71,7 +70,7 @@ public class PoolManager : BaseManager<PoolManager>
     public PoolManager()
     {
         //有需要再启用 改成合适的回收冗余的上限和间隔时间
-        //MonoManager.GetInstance().StartCoroutine(ClearCache(5,10));
+        MonoManager.GetInstance().StartCoroutine(ClearCache(20,60));
     }
 
     /// <summary>

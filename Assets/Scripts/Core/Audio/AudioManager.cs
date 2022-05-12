@@ -20,6 +20,7 @@ public class AudioManager : BaseManager<AudioManager>
         if(BGM == null)
         {
             GameObject obj = new GameObject{ name = "BGM" };
+            obj.AddComponent<BGMKeep>();
             BGM = obj.AddComponent<AudioSource>();
             ResourceManager.GetInstance().LoadAsync<AudioClip>("Music/BGM/" + name, (clip) =>
             {

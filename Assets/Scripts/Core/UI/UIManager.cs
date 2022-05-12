@@ -78,7 +78,7 @@ public class UIManager : BaseManager<UIManager>
     public void ShowPanel<T>(string name, E_UI_Layer layer = E_UI_Layer.Middle, UnityAction<T> callBack = null) where T : BasePanel
     {
         ResourceManager.GetInstance().LoadAsync<GameObject>("UI/" + name, (panel) =>
-         {
+        {
              if (panelDic.ContainsKey(name)) 
              {
                  panelDic[name].UIComponentOn();
@@ -178,5 +178,10 @@ public class UIManager : BaseManager<UIManager>
         entry.callback.AddListener(action);
 
         trigger.triggers.Add(entry);
+    }
+
+    public void Clear()
+    {
+        panelDic.Clear();
     }
 }

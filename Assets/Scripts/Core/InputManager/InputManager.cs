@@ -33,13 +33,28 @@ public class InputManager : BaseManager<InputManager>
         {
             return;
         }
+        CheckKeyCode(KeyCode.LeftShift);
         CheckKeyCode(KeyCode.Escape);
+
+        CheckKeyCode(KeyCode.Alpha1);
+        CheckKeyCode(KeyCode.Alpha2);
+        CheckKeyCode(KeyCode.Alpha3);
+        CheckKeyCode(KeyCode.Alpha4);
+        CheckKeyCode(KeyCode.Alpha5);
+        CheckKeyCode(KeyCode.Alpha6);
+        CheckKeyCode(KeyCode.Alpha7);
+
+        CheckKeyCode(KeyCode.E);
+
         CheckMouseButton(0);
         CheckMouseButton(1);
         CheckMouseButton(2);
 
         InputHorizontal();
         InputVertical();
+
+        InputHorizontalRaW();
+        InputVerticalRaw();
 
         MouseX();
         MouseY();
@@ -70,7 +85,6 @@ public class InputManager : BaseManager<InputManager>
     private void InputHorizontal()
     {
         EventCenter.GetInstance().EventTrigger("Horizontal", Input.GetAxis("Horizontal"));
-        
     }
 
     /// <summary>
@@ -80,6 +94,24 @@ public class InputManager : BaseManager<InputManager>
     {
         EventCenter.GetInstance().EventTrigger("Vertical", Input.GetAxis("Vertical"));
     }
+
+    /// <summary>
+    /// 键盘水平轴输入
+    /// </summary>
+    private void InputHorizontalRaW()
+    {
+        EventCenter.GetInstance().EventTrigger("HorizontalRaw", Input.GetAxisRaw("Horizontal"));
+    }
+
+    /// <summary>
+    /// 键盘竖直轴输入
+    /// </summary>
+    private void InputVerticalRaw()
+    {
+        EventCenter.GetInstance().EventTrigger("VerticalRaw", Input.GetAxisRaw("Vertical"));
+    }
+
+
 
     /// <summary>
     /// 检测鼠标 抬起 按下 长按 分发事件

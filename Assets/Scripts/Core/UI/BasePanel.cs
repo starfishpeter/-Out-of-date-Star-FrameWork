@@ -21,7 +21,7 @@ public class BasePanel : MonoBehaviour
         FindChildrenUIComponents<Slider>();
         FindChildrenUIComponents<Toggle>();
         FindChildrenUIComponents<ScrollRect>();
-        FindChildrenUIComponents<InputField>();
+        FindChildrenUIComponents<InputField>(); 
         FindChildrenUIComponents<ToggleGroup>();
     }
 
