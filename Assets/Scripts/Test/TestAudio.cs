@@ -16,7 +16,7 @@ public class TestAudio : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            AudioManager.GetInstance().SoundPlay("water", false, null);
+            AudioManager.GetInstance().SoundPlay("true", false, null);
         }
 
         if(volume > 0f)

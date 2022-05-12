@@ -25,6 +25,11 @@ public class MonoController : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     /// <summary>
     /// 添加帧更新事件
     /// </summary>
