@@ -30,6 +30,11 @@ public class MonoController : MonoBehaviour
         StopAllCoroutines();
     }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
     /// <summary>
     /// 添加帧更新事件
     /// </summary>

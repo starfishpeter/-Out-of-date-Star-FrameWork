@@ -138,6 +138,10 @@ public class UIManager : BaseManager<UIManager>
     {
         if(panelDic.ContainsKey(name))
         {
+            if(panelDic[name] == null)
+            {
+                return;
+            }
             //面板隐藏时处理的逻辑
             panelDic[name].UIComponentOff();
             GameObject.Destroy(panelDic[name].gameObject);

@@ -70,7 +70,10 @@ public class PoolManager : BaseManager<PoolManager>
     public PoolManager()
     {
         //有需要再启用 改成合适的回收冗余的上限和间隔时间
-        MonoManager.GetInstance().StartCoroutine(ClearCache(20,60));
+        if(MonoManager.GetInstance().controller != null)
+        {
+            MonoManager.GetInstance().StartCoroutine(ClearCache(20,60));
+        }
     }
 
     /// <summary>

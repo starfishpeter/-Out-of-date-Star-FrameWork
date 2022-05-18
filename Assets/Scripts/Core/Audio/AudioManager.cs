@@ -6,9 +6,9 @@ using UnityEngine.Events;
 public class AudioManager : BaseManager<AudioManager>
 {
     private AudioSource BGM = null;
-    private float BGMVolume = 1;
+    public float BGMVolume = 1;
 
-    private float SoundVolume = 1;
+    public float SoundVolume = 1;
     private List<GameObject> soundList = new List<GameObject>();
 
     /// <summary>
@@ -29,6 +29,23 @@ public class AudioManager : BaseManager<AudioManager>
                 BGM.volume = BGMVolume;
                 BGM.Play();
             });
+        }
+        else
+        {
+            if(BGM.isPlaying == false)
+            {
+                BGM.Play();
+            }
+            else if(BGM.clip.name != name)
+            {
+                ResourceManager.GetInstance().LoadAsync<AudioClip>("Music/BGM/" + name, (clip) =>
+                {
+                    BGM.clip = clip;
+                    BGM.loop = true;
+                    BGM.volume = BGMVolume;
+                    BGM.Play();
+                });
+            }
         }
     }
 
